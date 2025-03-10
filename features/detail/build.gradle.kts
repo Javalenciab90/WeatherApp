@@ -5,6 +5,7 @@ plugins {
 
 android {
     namespace = "com.javalenciab90.detail"
+    resourcePrefix = "detail_"
 
     kotlinOptions {
         jvmTarget = "1.8"
