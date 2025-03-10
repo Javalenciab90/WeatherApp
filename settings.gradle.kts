@@ -23,4 +23,4 @@ rootProject.name = "MovilBox"
 include(":app")
 include(":features:home")
 include(":features:detail")
-include(":theme")
+include(":design-system")
