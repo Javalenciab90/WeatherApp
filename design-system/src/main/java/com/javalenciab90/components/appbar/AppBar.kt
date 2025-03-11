@@ -14,7 +14,7 @@ import com.javalenciab90.theme.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppDefaultBar(
+fun AppBar(
     title: String,
     actionItems: List<ActionItemUi> = emptyList(),
     modifier: Modifier = Modifier,
@@ -53,7 +53,7 @@ fun AppDefaultBar(
 @Composable
 private fun AppDefaultBarPreview() {
     MovilBoxTheme {
-        AppDefaultBar(
+        AppBar(
             title = "Test AppBar"
         )
     }
@@ -66,7 +66,7 @@ private fun AppDefaultBarPreview() {
 @Composable
 private fun AppDefaultBarWithNavIcon() {
     MovilBoxTheme {
-        AppDefaultBar(
+        AppBar(
             title = "Test AppBar"
         ) {
             IconButton(
@@ -88,7 +88,7 @@ private fun AppDefaultBarWithNavIcon() {
 @Composable
 private fun AppDefaultBarWithActionItems() {
     MovilBoxTheme {
-        AppDefaultBar(
+        AppBar(
             title = "Test AppBar",
             actionItems = listOf(
                 ActionItemUi(
