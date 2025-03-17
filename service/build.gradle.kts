@@ -31,6 +31,7 @@ android {
 dependencies {
 
     implementation(project(":plataform"))
+    implementation(project(":data"))
 
     // Retrofit
     implementation(libs.square.retrofit2)
