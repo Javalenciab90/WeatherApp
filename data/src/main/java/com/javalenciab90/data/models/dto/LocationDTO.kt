@@ -1,6 +1,6 @@
 package com.javalenciab90.data.models.dto
 
-import com.javalenciab90.data.models.entities.LocationEntity
+import com.javalenciab90.data.room.entities.LocationEntity
 
 data class LocationDTO(
     val country: String,

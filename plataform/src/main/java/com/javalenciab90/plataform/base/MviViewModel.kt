@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -91,21 +90,20 @@ abstract class MviViewModel<STATE : Any, EFFECT : Any, INTENT : Any>(
         onStart: (suspend () -> Unit)? = null,
         onFinish: (suspend () -> Unit)? = null,
         block: suspend CoroutineScope.() -> Unit
-    ) = launch(block, Dispatchers.Main.immediate, onStart, onFinish)
+    ) = launch(block, context.immediateContext, onStart, onFinish)
 
 
     protected fun launchInMain(
         onStart: (suspend () -> Unit)? = null,
         onFinish: (suspend () -> Unit)? = null,
         block: suspend CoroutineScope.() -> Unit
-    ) = launch(block, context.immediateContext, onStart, onFinish)
+    ) = launch(block, context.mainContext, onStart, onFinish)
 
     protected fun launchInBackground(
         onStart: (suspend () -> Unit)? = null,
         onFinish: (suspend () -> Unit)? = null,
         block: suspend CoroutineScope.() -> Unit
     ) = launch(block, context.backgroundContext, onStart, onFinish)
-
 
     /**
      * Launching the coroutine: The launch function starts a coroutine in the viewModelScope.

@@ -1,6 +1,6 @@
 package com.javalenciab90.data.models.dto
 
-import com.javalenciab90.data.models.entities.CurrentEntity
+import com.javalenciab90.data.room.entities.CurrentEntity
 
 data class CurrentDTO(
     val cloudcover: Int,

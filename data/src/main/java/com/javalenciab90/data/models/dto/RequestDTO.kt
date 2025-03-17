@@ -1,6 +1,6 @@
 package com.javalenciab90.data.models.dto
 
-import com.javalenciab90.data.models.entities.RequestEntity
+import com.javalenciab90.data.room.entities.RequestEntity
 
 data class RequestDTO(
     val language: String,

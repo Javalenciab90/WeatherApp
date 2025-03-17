@@ -1,7 +1,7 @@
 package com.javalenciab90.data.mappers
 
 import com.javalenciab90.data.models.dto.WeatherDTO
-import com.javalenciab90.data.models.entities.WeatherEntity
+import com.javalenciab90.data.room.entities.WeatherEntity
 import javax.inject.Inject
 
 class EntityModelMapper @Inject constructor(): DataModelToEntityMapper<WeatherDTO, WeatherEntity> {

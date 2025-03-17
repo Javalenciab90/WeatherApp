@@ -1,4 +1,4 @@
-package com.javalenciab90.data.models.entities
+package com.javalenciab90.data.room.entities
 
 data class CurrentEntity(
     val cloudcover: Int,
