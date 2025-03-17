@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.javalenciab90.theme.MovilBoxTheme
+import com.javalenciab90.theme.WeatherAppTheme
 import com.javalenciab90.theme.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,7 +52,7 @@ fun AppBar(
 )
 @Composable
 private fun AppDefaultBarPreview() {
-    MovilBoxTheme {
+    WeatherAppTheme {
         AppBar(
             title = "Test AppBar"
         )
@@ -65,7 +65,7 @@ private fun AppDefaultBarPreview() {
 )
 @Composable
 private fun AppDefaultBarWithNavIcon() {
-    MovilBoxTheme {
+    WeatherAppTheme {
         AppBar(
             title = "Test AppBar"
         ) {
@@ -87,7 +87,7 @@ private fun AppDefaultBarWithNavIcon() {
 )
 @Composable
 private fun AppDefaultBarWithActionItems() {
-    MovilBoxTheme {
+    WeatherAppTheme {
         AppBar(
             title = "Test AppBar",
             actionItems = listOf(

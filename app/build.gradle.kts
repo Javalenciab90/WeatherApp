@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -32,7 +34,7 @@ dependencies {
 
     implementation(project(":design-system"))
     implementation(project(":plataform"))
-    implementation(project(":features:home"))
+    implementation(project(":features:weather"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

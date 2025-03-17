@@ -21,7 +21,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "MovilBox"
 include(":app")
-include(":features:home")
-include(":features:detail")
+include(":features:weather")
+include(":features:weathermap")
 include(":design-system")
 include(":plataform")
+include(":service")
+include(":data")
