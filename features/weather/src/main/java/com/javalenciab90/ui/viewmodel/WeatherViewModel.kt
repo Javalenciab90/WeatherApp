@@ -19,11 +19,18 @@ class WeatherViewModel @Inject constructor(
 
     private fun getWeather() {
         launchInBackground {
-            weatherRepository.getCurrentWeather(query = "Pereira").collect { dto ->
+            weatherRepository.getCurrentWeather(query = "Pereira").collect { weather ->
                 updateNow {
-                    it.copy(data = dto.toString())
+                    it.copy(data = weather.toString())
                 }
             }
+        }
+    }
+
+    override fun handleError(exception: Throwable) {
+        super.handleError(exception)
+        updateAsync {
+            it.copy(data = exception.toString())
         }
     }
 

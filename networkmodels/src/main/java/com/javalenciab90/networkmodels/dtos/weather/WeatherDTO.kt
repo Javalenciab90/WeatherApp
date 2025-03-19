@@ -10,8 +10,6 @@ data class WeatherDTO(
     val location: LocationDTO?,
     @SerializedName("current")
     val current: CurrentDTO?,
-    @SerializedName("success")
-    val isFailed: Boolean?,
     @SerializedName("error")
     val error: ErrorDTO?
 )

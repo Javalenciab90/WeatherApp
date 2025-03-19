@@ -1,5 +1,6 @@
 package com.javalenciab90.plataform.base
 
+import android.util.Log
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -30,8 +31,9 @@ abstract class MviViewModel<STATE : Any, EFFECT : Any, INTENT : Any>(
 
     @CallSuper
     open fun handleError(exception: Throwable) {
-        //Todo: Check the way to Handle Error
+        Log.e("ERROR", exception.toString())
     }
+
     private val initialState by lazy { setInitialState() }
 
     val _mutableUiState = MutableStateFlow(initialState)

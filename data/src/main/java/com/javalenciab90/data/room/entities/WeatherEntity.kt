@@ -15,7 +15,8 @@ data class WeatherEntity(
         return Weather(
             current = currentEntity?.toModel(),
             location = locationEntity?.toModel(),
-            request = requestEntity?.toModel()
+            request = requestEntity?.toModel(),
+            error = null
         )
     }
 }
