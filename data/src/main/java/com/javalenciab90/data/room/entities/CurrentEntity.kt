@@ -1,5 +1,7 @@
 package com.javalenciab90.data.room.entities
 
+import com.javalenciab90.models.Current
+
 data class CurrentEntity(
     val cloudcover: Int,
     val feelslike: Int,
@@ -16,4 +18,23 @@ data class CurrentEntity(
     val wind_degree: Int,
     val wind_dir: String,
     val wind_speed: Int
-)
+) {
+    fun toModel() : Current {
+        return Current(
+            cloudcover,
+            feelslike, humidity,
+            observation_time,
+            precip,
+            pressure,
+            temperature,
+            uv_index,
+            visibility,
+            weather_code,
+            weather_descriptions,
+            weather_icons,
+            wind_degree,
+            wind_dir,
+            wind_speed
+        )
+    }
+}

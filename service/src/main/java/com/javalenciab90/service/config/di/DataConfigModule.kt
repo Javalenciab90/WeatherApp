@@ -1,17 +1,18 @@
 package com.javalenciab90.service.config.di
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.javalenciab90.service.BuildConfig
 import com.javalenciab90.service.config.utils.ApiKeyInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.serialization.json.Json
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -48,15 +49,28 @@ object DataConfigModule {
 
     @Singleton
     @Provides
+    fun provideGsonBuilder(): Gson {
+        return GsonBuilder()
+            //.excludeFieldsWithoutExposeAnnotation()
+            .create()
+    }
+
+    @Singleton
+    @Provides
+    fun provideConvertFactory(gson: Gson) : Converter.Factory {
+        return GsonConverterFactory.create(gson)
+    }
+
+    @Singleton
+    @Provides
     fun provideRetrofitClient(
         baseUrl: String,
+        converterFactory: Converter.Factory,
         okHttpClient: OkHttpClient
     ) : Retrofit {
-        val contentType = CONTENT_TYPE.toMediaType()
-        val json = Json { ignoreUnknownKeys = true }
         return Retrofit.Builder()
             .baseUrl(baseUrl)
-            .addConverterFactory(json.asConverterFactory(contentType))
+            .addConverterFactory(converterFactory)
             .client(okHttpClient)
             .build()
     }

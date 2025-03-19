@@ -1,6 +1,6 @@
-package com.javalenciab90.data.datasource
+package com.javalenciab90.data.datasource.remote
 
-import com.javalenciab90.data.models.dto.WeatherDTO
+import com.javalenciab90.networkmodels.dtos.weather.WeatherDTO
 import kotlinx.coroutines.flow.Flow
 
 interface WeatherRemoteData {

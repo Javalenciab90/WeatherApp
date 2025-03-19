@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt.android)
 }
 
 android {
@@ -15,6 +16,19 @@ android {
 dependencies {
 
     implementation(project(":plataform"))
+    implementation(project(":service"))
+    implementation(project(":networkmodels"))
+    api(project(":domain"))
+
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.hilt.compiler)
+
+    implementation(libs.square.retrofit2)
+    implementation(libs.square.okhttp3)
+    implementation(libs.square.okhttp3.loggingInterceptor)
+    implementation(libs.square.converter.kotlinxSerialization)
+    implementation(libs.kotlinx.serialization.json)
 
     // Room
     implementation(libs.androidx.room.ktx)

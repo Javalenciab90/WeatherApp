@@ -1,19 +1,14 @@
 package com.javalenciab90.ui.viewmodel
 
-interface WeatherContract {
+data class State(
+    val data: String? = null,
+    val error: String? = null
+)
 
-    sealed class State {
-        data object Success : State()
-        data object Loading : State()
-        data object Failed : State()
-    }
+sealed interface Effect {
 
-    sealed interface Effect {
+}
 
-    }
-
-    sealed interface Intent {
-        data object SearchOnMap : Intent
-    }
-
+sealed interface Intent {
+    data object SearchOnMap : Intent
 }

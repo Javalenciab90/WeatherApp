@@ -34,8 +34,7 @@ abstract class MviViewModel<STATE : Any, EFFECT : Any, INTENT : Any>(
     }
     private val initialState by lazy { setInitialState() }
 
-
-    private val _mutableUiState = MutableStateFlow(initialState)
+    val _mutableUiState = MutableStateFlow(initialState)
     val uiState = _mutableUiState.asStateFlow()
     val currentUiState: STATE get() = uiState.value
 
@@ -91,7 +90,6 @@ abstract class MviViewModel<STATE : Any, EFFECT : Any, INTENT : Any>(
         onFinish: (suspend () -> Unit)? = null,
         block: suspend CoroutineScope.() -> Unit
     ) = launch(block, context.immediateContext, onStart, onFinish)
-
 
     protected fun launchInMain(
         onStart: (suspend () -> Unit)? = null,

@@ -1,16 +1,32 @@
 package com.javalenciab90.ui.viewmodel
 
+import android.util.Log
+import com.javalenciab90.domain.repository.WeatherRepository
 import com.javalenciab90.plataform.base.CoroutineContextProvider
 import com.javalenciab90.plataform.base.MviViewModel
-import com.javalenciab90.plataform.base.SimpleMviViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
+    private val weatherRepository: WeatherRepository,
     coroutineContext: CoroutineContextProvider
-) : MviViewModel<WeatherContract.State, WeatherContract.Effect, WeatherContract.Intent>(coroutineContext) {
+) : MviViewModel<State, Effect, Intent>(coroutineContext) {
 
-    override fun setInitialState() = WeatherContract.State.Loading
+    init {
+        getWeather()
+    }
+
+    private fun getWeather() {
+        launchInBackground {
+            weatherRepository.getCurrentWeather(query = "Pereira").collect { dto ->
+                updateNow {
+                    it.copy(data = dto.toString())
+                }
+            }
+        }
+    }
+
+    override fun setInitialState() = State()
 
 }

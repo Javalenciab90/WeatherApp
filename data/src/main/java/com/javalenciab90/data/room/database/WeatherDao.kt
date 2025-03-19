@@ -13,5 +13,5 @@ interface WeatherDao {
     fun insertWeatherInfo(weatherEntity: WeatherEntity)
 
     @Query("SELECT * FROM weather_info")
-    fun getWeatherInfo() : WeatherEntity
+    fun getWeatherInfo() : WeatherEntity?
 }

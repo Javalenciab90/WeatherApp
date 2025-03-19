@@ -36,6 +36,7 @@ androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", versi
 androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navVersion"  }
 
 square-retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+square-converter-retrofit2 = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion"}
 square-okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
 square-okhttp3-loggingInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
 square-converter-kotlinxSerialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerialization" }
