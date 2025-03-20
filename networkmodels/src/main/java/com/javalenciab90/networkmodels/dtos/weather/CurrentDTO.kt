@@ -13,7 +13,7 @@ data class CurrentDTO(
     @SerializedName("observation_time")
     val observationTime: String,
     @SerializedName("precip")
-    val precip: Int,
+    val precip: Double,
     @SerializedName("pressure")
     val pressure: Int,
     @SerializedName("temperature")

@@ -16,19 +16,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import com.javalenciab90.components.error.ErrorScreen
+import com.javalenciab90.components.loading.LoadingScreen
 import com.javalenciab90.theme.Dimens
 import com.javalenciab90.theme.WeatherAppTheme
-import com.javalenciab90.ui.viewmodel.Intent
-import com.javalenciab90.ui.viewmodel.State
+import com.javalenciab90.ui.viewmodel.Status
+import com.javalenciab90.ui.viewmodel.WeatherContract
 
 @Composable
 fun WeatherBody(
-    uiState: State,
-    onHandleIntent: (Intent) -> Unit,
+    uiState: WeatherContract.WeatherState,
+    onHandleIntent: (WeatherContract.Intent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    uiState.data?.let {
-        Text(text = it)
+    when (uiState.status) {
+        is Status.Loading -> {
+            LoadingScreen()
+        }
+        is Status.Success -> {
+            Text(uiState.status.data)
+        }
+        is Status.Error -> {
+            ErrorScreen(modifier = modifier)
+        }
     }
 }
 

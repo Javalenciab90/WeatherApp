@@ -7,7 +7,7 @@ data class CurrentEntity(
     val feelslike: Int,
     val humidity: Int,
     val observation_time: String,
-    val precip: Int,
+    val precip: Double,
     val pressure: Int,
     val temperature: Int,
     val uv_index: Int,

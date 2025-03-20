@@ -5,7 +5,6 @@ import com.javalenciab90.models.Weather
 import com.javalenciab90.networkmodels.dtos.weather.WeatherDTO
 import com.javalenciab90.service.api.WeatherService
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class WeatherRemoteDataImpl @Inject constructor(

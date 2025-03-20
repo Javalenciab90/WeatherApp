@@ -1,6 +1,5 @@
 package com.javalenciab90.ui.viewmodel
 
-import android.util.Log
 import com.javalenciab90.domain.repository.WeatherRepository
 import com.javalenciab90.plataform.base.CoroutineContextProvider
 import com.javalenciab90.plataform.base.MviViewModel
@@ -11,7 +10,7 @@ import javax.inject.Inject
 class WeatherViewModel @Inject constructor(
     private val weatherRepository: WeatherRepository,
     coroutineContext: CoroutineContextProvider
-) : MviViewModel<State, Effect, Intent>(coroutineContext) {
+) : MviViewModel<WeatherContract.WeatherState, WeatherContract.Effect, WeatherContract.Intent>(coroutineContext) {
 
     init {
         getWeather()
@@ -20,8 +19,19 @@ class WeatherViewModel @Inject constructor(
     private fun getWeather() {
         launchInBackground {
             weatherRepository.getCurrentWeather(query = "Pereira").collect { weather ->
-                updateNow {
-                    it.copy(data = weather.toString())
+                weather.error?.let { error ->
+                    updateNow {
+                        it.copy(
+                            status = Status.Error(error = error.info)
+                        )
+                    }
+                }
+                weather.current?.let { current ->
+                    updateNow {
+                        it.copy(
+                            status = Status.Success(data = current.toString())
+                        )
+                    }
                 }
             }
         }
@@ -30,10 +40,11 @@ class WeatherViewModel @Inject constructor(
     override fun handleError(exception: Throwable) {
         super.handleError(exception)
         updateAsync {
-            it.copy(data = exception.toString())
+            it.copy(
+                status = Status.Error(exception.toString()))
         }
     }
 
-    override fun setInitialState() = State()
+    override fun setInitialState() = WeatherContract.WeatherState(Status.Loading)
 
 }

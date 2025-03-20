@@ -25,8 +25,8 @@ abstract class FetchRemoteData<INPUT, OUTPUT> : RemoteDataSource<INPUT, OUTPUT> 
             val response = apiCall()
             if (response.isSuccessful) {
                 response.body()?.let {
-                    val entity = mapper.map(it)
-                    emit(entity)
+                    val weather = mapper.map(it)
+                    emit(weather)
                 } ?: throw RuntimeException("response body is null")
             } else {
                 /**

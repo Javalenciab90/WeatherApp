@@ -10,6 +10,4 @@ data class Location(
     val region: String,
     val timezone_id: String,
     val utc_offset: String
-) {
-
-}
+)
