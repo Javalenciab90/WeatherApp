@@ -1,12 +1,9 @@
 package com.javalenciab90.ui.viewmodel
 
-interface WeatherContract {
-
-    sealed class State {
-        data object Success : State()
-        data object Loading : State()
-        data object Failed : State()
-    }
+class WeatherContract {
+    data class WeatherState(
+        val status: Status
+    )
 
     sealed interface Effect {
 
@@ -15,5 +12,10 @@ interface WeatherContract {
     sealed interface Intent {
         data object SearchOnMap : Intent
     }
+}
 
+sealed interface Status {
+    data object Loading : Status
+    data class Success(val data: String) : Status
+    data class Error(val error: String) : Status
 }

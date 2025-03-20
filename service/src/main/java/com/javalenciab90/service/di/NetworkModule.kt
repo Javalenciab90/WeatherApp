@@ -12,9 +12,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ServiceModule {
 
-    @Singleton
-    @Provides
-    fun provideRestApiService(retrofit: Retrofit): WeatherService {
-        return retrofit.create(WeatherService::class.java)
-    }
+//    @Singleton
+//    @Provides
+//    fun provideRestApiService(retrofit: Retrofit): WeatherService {
+//        return retrofit.create(WeatherService::class.java)
+//    }
 }

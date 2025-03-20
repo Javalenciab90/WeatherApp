@@ -3,6 +3,8 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt.android)
 }
 
 val secretsFile = rootProject.file("secrets.properties")
@@ -19,7 +21,7 @@ android {
     }
 
     defaultConfig {
-        buildConfigField("String", "WEATHER_STACK_API", "\"weatherStackKey\"")
+        buildConfigField("String", "WEATHER_STACK_API", weatherStackKey)
         buildConfigField("String", "URL_BASE", "\"http://api.weatherstack.com/\"")
     }
 
@@ -31,14 +33,20 @@ android {
 dependencies {
 
     implementation(project(":plataform"))
-    implementation(project(":data"))
+    implementation(project(":networkmodels"))
 
     // Retrofit
     implementation(libs.square.retrofit2)
+    implementation(libs.square.converter.retrofit2)
     implementation(libs.square.okhttp3)
     implementation(libs.square.okhttp3.loggingInterceptor)
     implementation(libs.square.converter.kotlinxSerialization)
     implementation(libs.kotlinx.serialization.json)
+
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.hilt.compiler)
+    implementation(libs.gson)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

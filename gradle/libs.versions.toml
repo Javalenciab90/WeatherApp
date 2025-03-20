@@ -1,24 +1,26 @@
 [versions]
-agp = "8.7.3"
-kotlin = "2.0.0"
-coreKtx = "1.15.0"
-junit = "4.13.2"
-junitVersion = "1.2.1"
-kotlinxSerializationJson = "1.7.1"
-espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.1"
-composeBom = "2025.02.00"
+agp = "8.7.3"
 appcompat = "1.7.0"
-material = "1.12.0"
-navVersion = "2.8.8"
-uiTextGoogleFonts = "1.7.8"
+composeBom = "2025.02.00"
+converter_gson = "2.10.1"
+coreKtx = "1.15.0"
+espressoCore = "3.6.1"
 hilt = "2.52"
 hilt-navigation = "1.2.0"
+junit = "4.13.2"
+junitVersion = "1.2.1"
+kotlin = "2.0.0"
+kotlinxSerializationJson = "1.7.1"
 ksp = "2.0.10-1.0.24"
-retrofitVersion = "2.9.0"
+lifecycleRuntimeKtx = "2.8.7"
+material = "1.12.0"
+navVersion = "2.8.8"
 okhttpVersion = "4.12.0"
 retrofitKotlinxSerialization = "1.0.0"
+retrofitVersion = "2.9.0"
+roomVersion = "2.6.1"
+uiTextGoogleFonts = "1.7.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,9 +36,16 @@ androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", versi
 androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navVersion"  }
 
 square-retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+square-converter-retrofit2 = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion"}
 square-okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
 square-okhttp3-loggingInterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
 square-converter-kotlinxSerialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerialization" }
+
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
+
+gson = { group= "com.google.code.gson", name = "gson", version.ref = "converter_gson"}
 
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 

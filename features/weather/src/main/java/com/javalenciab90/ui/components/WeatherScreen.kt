@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.javalenciab90.theme.WeatherAppTheme
+import com.javalenciab90.ui.viewmodel.Status
 import com.javalenciab90.ui.viewmodel.WeatherContract
 
 @Composable
@@ -29,7 +30,7 @@ private fun WeatherScreenPreview() {
     WeatherAppTheme {
         WeatherScreen { paddingValues ->
             WeatherBody(
-                uiState = WeatherContract.State.Success,
+                uiState = WeatherContract.WeatherState(Status.Success("Success Data")),
                 onHandleIntent = {},
                 modifier = Modifier.padding(paddingValues)
             )

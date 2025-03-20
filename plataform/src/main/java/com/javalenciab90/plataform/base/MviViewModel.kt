@@ -1,11 +1,11 @@
 package com.javalenciab90.plataform.base
 
+import android.util.Log
 import androidx.annotation.CallSuper
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,12 +31,12 @@ abstract class MviViewModel<STATE : Any, EFFECT : Any, INTENT : Any>(
 
     @CallSuper
     open fun handleError(exception: Throwable) {
-        //Todo: Check the way to Handle Error
+        Log.e("ERROR", exception.toString())
     }
+
     private val initialState by lazy { setInitialState() }
 
-
-    private val _mutableUiState = MutableStateFlow(initialState)
+    val _mutableUiState = MutableStateFlow(initialState)
     val uiState = _mutableUiState.asStateFlow()
     val currentUiState: STATE get() = uiState.value
 
@@ -91,21 +91,19 @@ abstract class MviViewModel<STATE : Any, EFFECT : Any, INTENT : Any>(
         onStart: (suspend () -> Unit)? = null,
         onFinish: (suspend () -> Unit)? = null,
         block: suspend CoroutineScope.() -> Unit
-    ) = launch(block, Dispatchers.Main.immediate, onStart, onFinish)
-
+    ) = launch(block, context.immediateContext, onStart, onFinish)
 
     protected fun launchInMain(
         onStart: (suspend () -> Unit)? = null,
         onFinish: (suspend () -> Unit)? = null,
         block: suspend CoroutineScope.() -> Unit
-    ) = launch(block, context.immediateContext, onStart, onFinish)
+    ) = launch(block, context.mainContext, onStart, onFinish)
 
     protected fun launchInBackground(
         onStart: (suspend () -> Unit)? = null,
         onFinish: (suspend () -> Unit)? = null,
         block: suspend CoroutineScope.() -> Unit
     ) = launch(block, context.backgroundContext, onStart, onFinish)
-
 
     /**
      * Launching the coroutine: The launch function starts a coroutine in the viewModelScope.

@@ -20,30 +20,24 @@ import com.javalenciab90.components.error.ErrorScreen
 import com.javalenciab90.components.loading.LoadingScreen
 import com.javalenciab90.theme.Dimens
 import com.javalenciab90.theme.WeatherAppTheme
+import com.javalenciab90.ui.viewmodel.Status
 import com.javalenciab90.ui.viewmodel.WeatherContract
 
 @Composable
 fun WeatherBody(
-    uiState: WeatherContract.State,
+    uiState: WeatherContract.WeatherState,
     onHandleIntent: (WeatherContract.Intent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    when(uiState) {
-        is WeatherContract.State.Loading -> {
+    when (uiState.status) {
+        is Status.Loading -> {
             LoadingScreen()
         }
-
-        is WeatherContract.State.Success -> {
-            WeatherContent(
-                onMapSearch = {
-                    onHandleIntent(WeatherContract.Intent.SearchOnMap)
-                },
-                modifier
-            )
+        is Status.Success -> {
+            Text(uiState.status.data)
         }
-
-        is WeatherContract.State.Failed -> {
-            ErrorScreen()
+        is Status.Error -> {
+            ErrorScreen(modifier = modifier)
         }
     }
 }
