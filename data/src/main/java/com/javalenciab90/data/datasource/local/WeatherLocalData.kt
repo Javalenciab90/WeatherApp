@@ -6,5 +6,5 @@ import com.javalenciab90.models.Weather
 interface WeatherLocalData {
     fun insertWeatherData(weather: Weather)
 
-    fun getWeatherData() : Weather?
+    fun getWeatherData(query: String) : Weather?
 }

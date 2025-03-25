@@ -3,10 +3,13 @@ package com.javalenciab90.ui.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowForward
 import androidx.compose.material3.Icon
@@ -14,12 +17,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.AsyncImage
 import com.javalenciab90.components.error.ErrorScreen
 import com.javalenciab90.components.loading.LoadingScreen
 import com.javalenciab90.theme.Dimens
 import com.javalenciab90.theme.WeatherAppTheme
+import com.javalenciab90.ui.models.WeatherDataUi
+import com.javalenciab90.ui.models.WeatherDataUiPreviewProvider
 import com.javalenciab90.ui.viewmodel.Status
 import com.javalenciab90.ui.viewmodel.WeatherContract
 
@@ -34,7 +42,13 @@ fun WeatherBody(
             LoadingScreen()
         }
         is Status.Success -> {
-            Text(uiState.status.data)
+            WeatherContent(
+                modifier = modifier,
+                uiData = uiState.status.data,
+                onMapSearch = {
+                    onHandleIntent(WeatherContract.Intent.SearchOnMap)
+                }
+            )
         }
         is Status.Error -> {
             ErrorScreen(modifier = modifier)
@@ -44,19 +58,31 @@ fun WeatherBody(
 
 @Composable
 fun WeatherContent(
+    uiData: WeatherDataUi,
     onMapSearch: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier.fillMaxSize()
     ) {
-        // Todo: Set View Of Weather Data
-        StickyFooter(
-            onMapSearch = onMapSearch,
-            modifier = Modifier.align(Alignment.BottomCenter)
-        )
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            uiData.weatherIcons?.first()?.let {
+                AsyncImage(
+                    model = it,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(Dimens.All_48))
+                        .size(Dimens.All_100)
+                )
+            }
+            StickyFooter(
+                onMapSearch = onMapSearch
+            )
+        }
     }
-
 }
 
 @Composable
@@ -85,10 +111,11 @@ fun StickyFooter(
 
 @Preview(showBackground = true)
 @Composable
-private fun StickyFooterPreview() {
+private fun WeatherContentPreview() {
     WeatherAppTheme {
-        StickyFooter(
-            onMapSearch = { }
+        WeatherContent(
+            uiData = WeatherDataUiPreviewProvider.getWeatherDataUi(),
+            onMapSearch = {}
         )
     }
 }

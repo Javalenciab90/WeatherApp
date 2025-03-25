@@ -12,6 +12,9 @@ interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWeatherInfo(weatherEntity: WeatherEntity)
 
-    @Query("SELECT * FROM weather_info")
-    fun getWeatherInfo() : WeatherEntity?
+    /**
+     * The @Query get the Info when get the exactly query match field.
+     */
+    @Query("SELECT * FROM weather_info WHERE requestEntity LIKE '{ \"query\": \"' || :query || '\"%'")
+    fun getWeatherInfo(query: String) : WeatherEntity?
 }

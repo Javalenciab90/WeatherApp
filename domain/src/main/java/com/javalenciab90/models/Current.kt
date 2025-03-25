@@ -16,6 +16,4 @@ data class Current(
     val wind_degree: Int,
     val wind_dir: String,
     val wind_speed: Int
-) {
-
-}
+)

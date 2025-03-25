@@ -2,6 +2,7 @@ package com.javalenciab90.theme
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlin.time.Duration.Companion.milliseconds
 
 object Dimens {
     // all
@@ -29,5 +30,13 @@ object Dimens {
     val All_52: Dp = 52.dp
     val All_58: Dp = 58.dp
     val All_80: Dp = 80.dp
+    val All_100: Dp = 100.dp
+    val All_120: Dp = 120.dp
     val All_200: Dp = 200.dp
+
+    val Milliseconds300 = 300.milliseconds
+    val Milliseconds500 = 500.milliseconds
+    val Milliseconds2000 = 2000.milliseconds
+
+
 }
