@@ -17,12 +17,14 @@ class WeatherRepositoryImpl @Inject constructor(
 ) : WeatherRepository {
 
     override suspend fun getCurrentWeather(query: String): Flow<Weather> = flow {
-        val localResult = weatherLocalData.getWeatherData()
+        val localResult = weatherLocalData.getWeatherData(query)
         if (localResult != null) {
             emit(localResult)
         } else {
             weatherRemoteData.getCurrentWeather(query).collect { remoteResult ->
-                weatherLocalData.insertWeatherData(remoteResult)
+                remoteResult.takeIf { it.error == null }?.let {
+                    weatherLocalData.insertWeatherData(it)
+                }
                 emit(remoteResult)
             }
         }

@@ -1,7 +1,11 @@
 package com.javalenciab90.ui.viewmodel
 
+import com.javalenciab90.ui.models.WeatherDataUi
+
 class WeatherContract {
+
     data class WeatherState(
+        val searchText: String = "",
         val status: Status
     )
 
@@ -10,12 +14,15 @@ class WeatherContract {
     }
 
     sealed interface Intent {
+        data class Search(val text: String) : Intent
+        data object ClearSearch: Intent
         data object SearchOnMap : Intent
+        data object OpenSettings : Intent
     }
 }
 
 sealed interface Status {
     data object Loading : Status
-    data class Success(val data: String) : Status
+    data class Success(val data: WeatherDataUi) : Status
     data class Error(val error: String) : Status
 }
