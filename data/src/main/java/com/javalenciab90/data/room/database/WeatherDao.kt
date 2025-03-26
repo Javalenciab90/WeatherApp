@@ -4,17 +4,17 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.javalenciab90.data.room.entities.WeatherEntity
+import com.javalenciab90.data.room.entities.WeatherCurrentEntity
 
 @Dao
 interface WeatherDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertWeatherInfo(weatherEntity: WeatherEntity)
+    fun insertWeatherInfo(weatherEntity: WeatherCurrentEntity)
 
     /**
-     * The @Query get the Info when get the exactly query match field.
+     * The @Query get Entity when name fields contains the query.
      */
-    @Query("SELECT * FROM weather_info WHERE requestEntity LIKE '{ \"query\": \"' || :query || '\"%'")
-    fun getWeatherInfo(query: String) : WeatherEntity?
+    @Query("SELECT * FROM weather_table WHERE name LIKE '%' || :query || '%' LIMIT 1")
+    fun getWeatherInfo(query: String): WeatherCurrentEntity?
 }

@@ -1,8 +1,11 @@
 package com.javalenciab90.data.di
 
-import com.javalenciab90.data.datasource.remote.WeatherRemoteData
-import com.javalenciab90.data.datasource.remote.WeatherRemoteDataImpl
-import com.javalenciab90.data.mappers.NetworkMapper
+import com.javalenciab90.data.datasource.remote.geolocation.GeoLocationRemoteData
+import com.javalenciab90.data.datasource.remote.geolocation.GeoLocationRemoteDataImpl
+import com.javalenciab90.data.datasource.remote.weather.WeatherRemoteData
+import com.javalenciab90.data.datasource.remote.weather.WeatherRemoteDataImpl
+import com.javalenciab90.data.mappers.GeoLocationNetworkMapper
+import com.javalenciab90.data.mappers.WeatherNetworkMapper
 import com.javalenciab90.service.api.WeatherService
 import dagger.Module
 import dagger.Provides
@@ -24,10 +27,21 @@ object RemoteDataModule {
     @Provides
     fun bindsWeatherRemoteData(
         weatherService: WeatherService,
-        networkMapper: NetworkMapper
+        weatherNetworkMapper: WeatherNetworkMapper
     ) : WeatherRemoteData {
         return WeatherRemoteDataImpl(
-            weatherService, networkMapper
+            weatherService, weatherNetworkMapper
         )
     }
+
+    @Provides
+    fun bindsGeoLocationRemoteData(
+        weatherService: WeatherService,
+        geoLocationNetworkMapper: GeoLocationNetworkMapper
+    ) : GeoLocationRemoteData {
+        return GeoLocationRemoteDataImpl(
+            weatherService, geoLocationNetworkMapper
+        )
+    }
+
 }

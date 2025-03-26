@@ -1,11 +1,9 @@
 package com.javalenciab90.di
 
-import com.javalenciab90.domain.repository.WeatherRepositoryImpl
-import com.javalenciab90.domain.repository.WeatherRepository
-import com.javalenciab90.models.Weather
-import com.javalenciab90.plataform.mapper.WeatherMapper
-import com.javalenciab90.ui.mappers.WeatherDataUiMapper
-import com.javalenciab90.ui.models.WeatherDataUi
+import com.javalenciab90.domain.repository.geo.GeoLocationRepositoryImpl
+import com.javalenciab90.domain.repository.geo.GeoLocationRepository
+import com.javalenciab90.domain.repository.weather.WeatherRepository
+import com.javalenciab90.domain.repository.weather.WeatherRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,10 +14,8 @@ import dagger.hilt.components.SingletonComponent
 abstract class BindsWeatherModule {
 
     @Binds
-    abstract fun bindWeatherToWeatherUiMapper(
-        weatherUiMapper: WeatherDataUiMapper
-    ): WeatherMapper<Weather, WeatherDataUi>
+    abstract fun bindsWeatherRepository(weatherRepositoryImpl: WeatherRepositoryImpl) : WeatherRepository
 
     @Binds
-    abstract fun bindsWeatherRepository(weatherRepositoryImpl: WeatherRepositoryImpl) : WeatherRepository
+    abstract fun bindsGeoLocationRepository(geoLocationRepository: GeoLocationRepositoryImpl) : GeoLocationRepository
 }

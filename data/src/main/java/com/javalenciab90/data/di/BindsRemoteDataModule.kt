@@ -1,20 +1,19 @@
 package com.javalenciab90.data.di
 
-import com.javalenciab90.data.mappers.CurrentDtoToCurrentMapper
+import com.javalenciab90.data.mappers.GeoLocationNetworkMapper
 import com.javalenciab90.data.mappers.LocationDtoToLocationMapper
-import com.javalenciab90.data.mappers.NetworkErrorMapper
-import com.javalenciab90.data.mappers.NetworkMapper
-import com.javalenciab90.data.mappers.RequestDtoToRequestMapper
-import com.javalenciab90.models.Current
-import com.javalenciab90.models.Location
-import com.javalenciab90.models.Request
-import com.javalenciab90.models.Weather
-import com.javalenciab90.models.WeatherError
-import com.javalenciab90.networkmodels.dtos.weather.CurrentDTO
-import com.javalenciab90.networkmodels.dtos.weather.ErrorDTO
-import com.javalenciab90.networkmodels.dtos.weather.LocationDTO
-import com.javalenciab90.networkmodels.dtos.weather.RequestDTO
-import com.javalenciab90.networkmodels.dtos.weather.WeatherDTO
+import com.javalenciab90.data.mappers.MainDtoToMainMapper
+import com.javalenciab90.data.mappers.WeatherDtoToWeatherMapper
+import com.javalenciab90.models.geo.GeoLocation
+import com.javalenciab90.models.openweather.Location
+import com.javalenciab90.models.openweather.Main
+import com.javalenciab90.models.openweather.Weather
+import com.javalenciab90.networkmodels.dtos.geo.GeoLocationDTO
+import com.javalenciab90.networkmodels.dtos.geo.GeoLocationListDTO
+import com.javalenciab90.networkmodels.dtos.openweather.LocationDTO
+import com.javalenciab90.networkmodels.dtos.openweather.MainDTO
+import com.javalenciab90.networkmodels.dtos.openweather.WeatherDTO
+import com.javalenciab90.plataform.mapper.GeoLocationMapper
 import com.javalenciab90.plataform.mapper.WeatherMapper
 import dagger.Binds
 import dagger.Module
@@ -26,28 +25,23 @@ import dagger.hilt.components.SingletonComponent
 abstract class BindsRemoteDataModule {
 
     @Binds
-    abstract fun bindNetworkErrorToWeatherErrorMapper(
-        mapper: NetworkErrorMapper
-    ): WeatherMapper<ErrorDTO, WeatherError>
+    abstract fun bindGeoLocationDtoToGeoLocationMapper(
+        mapper: GeoLocationNetworkMapper
+    ) : GeoLocationMapper<GeoLocationListDTO, GeoLocation>
 
     @Binds
-    abstract fun bindCurrentDtoToCurrentMapper(
-        mapper: CurrentDtoToCurrentMapper
-    ): WeatherMapper<CurrentDTO, Current>
+    abstract fun bindWeatherDtoToWeatherMapper(
+        mapper: WeatherDtoToWeatherMapper
+    ) : WeatherMapper<List<WeatherDTO>, Weather>
 
     @Binds
     abstract fun bindLocationDtoToLocationMapper(
         mapper: LocationDtoToLocationMapper
-    ): WeatherMapper<LocationDTO, Location>
+    ) : WeatherMapper<LocationDTO, Location>
 
     @Binds
-    abstract fun bindRequestDtoToRequestMapper(
-        mapper: RequestDtoToRequestMapper
-    ): WeatherMapper<RequestDTO, Request>
-
-    @Binds
-    abstract fun bindWeatherNetworkToEntityMapper(
-        mapper: NetworkMapper
-    ): WeatherMapper<WeatherDTO, Weather>
+    abstract fun bindMainDtoToMainMapper(
+        mapper: MainDtoToMainMapper
+    ) : WeatherMapper<MainDTO, Main>
 
 }

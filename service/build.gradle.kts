@@ -11,7 +11,7 @@ val secretsFile = rootProject.file("secrets.properties")
 val properties = Properties()
 secretsFile.inputStream().use { properties.load(it) }
 
-val weatherStackKey: String = properties.getProperty("WEATHER_STACK_API")
+val weatherOpenKey: String = properties.getProperty("WEATHER_OPEN_API")
 
 android {
     namespace = "com.javalenciab90.service"
@@ -21,8 +21,8 @@ android {
     }
 
     defaultConfig {
-        buildConfigField("String", "WEATHER_STACK_API", weatherStackKey)
-        buildConfigField("String", "URL_BASE", "\"http://api.weatherstack.com/\"")
+        buildConfigField("String", "WEATHER_OPEN_API", weatherOpenKey)
+        buildConfigField("String", "URL_BASE", "\"https://api.openweathermap.org/\"")
     }
 
     kotlinOptions {

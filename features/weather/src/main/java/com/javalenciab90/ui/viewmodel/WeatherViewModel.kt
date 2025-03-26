@@ -1,10 +1,11 @@
 package com.javalenciab90.ui.viewmodel
 
+import com.javalenciab90.domain.usecases.GetGeoLocationUseCase
 import com.javalenciab90.domain.usecases.GetWeatherUseCase
 import com.javalenciab90.plataform.base.CoroutineContextProvider
 import com.javalenciab90.plataform.base.MviViewModel
 import com.javalenciab90.theme.Dimens
-import com.javalenciab90.ui.mappers.WeatherDataUiMapper
+import com.javalenciab90.ui.models.WeatherDataUiPreviewProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -18,7 +19,6 @@ import javax.inject.Inject
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
     private val getWeatherUseCase: GetWeatherUseCase,
-    private val weatherDataUiMapper: WeatherDataUiMapper,
     coroutineContext: CoroutineContextProvider
 ) : MviViewModel<WeatherContract.WeatherState, WeatherContract.Effect, WeatherContract.Intent>(coroutineContext) {
 
@@ -36,21 +36,11 @@ class WeatherViewModel @Inject constructor(
 
     private fun getWeather(query: String) {
         launchInBackground {
-            getWeatherUseCase(query = query).collect { weather ->
-                weather.error?.let { error ->
-                    updateNow {
-                        it.copy(
-                            searchText = query,
-                            status = Status.Error(error = error.info)
-                        )
-                    }
-                }
+            getWeatherUseCase(query = query).collect {
                 updateNow {
                     it.copy(
                         searchText = query,
-                        status = Status.Success(
-                            data = weatherDataUiMapper.map(weather)
-                        )
+                        status = Status.Success(data = WeatherDataUiPreviewProvider.getWeatherDataUi())
                     )
                 }
             }
