@@ -1,21 +1,21 @@
 package com.javalenciab90.data.datasource.local
 
-import com.javalenciab90.data.mappers.LocalMapper
+import com.javalenciab90.data.mappers.WeatherLocalMapper
 import com.javalenciab90.data.room.database.WeatherDao
-import com.javalenciab90.models.Weather
+import com.javalenciab90.models.openweather.WeatherCurrent
 import javax.inject.Inject
 
 class WeatherLocalDataImpl @Inject constructor(
     private val weatherDao: WeatherDao,
-    private val localMapper: LocalMapper
+    private val localMapper: WeatherLocalMapper
 ) : WeatherLocalData {
 
-    override fun insertWeatherData(weather: Weather) {
+    override fun insertWeatherData(weather: WeatherCurrent) {
         val weatherEntity = localMapper.map(weather)
         weatherDao.insertWeatherInfo(weatherEntity)
     }
 
-    override fun getWeatherData(query: String): Weather? {
+    override fun getWeatherData(query: String): WeatherCurrent? {
         return weatherDao.getWeatherInfo(query)?.toModel()
     }
 }

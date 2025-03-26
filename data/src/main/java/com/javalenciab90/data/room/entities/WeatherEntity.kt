@@ -1,22 +1,20 @@
 package com.javalenciab90.data.room.entities
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.javalenciab90.models.Weather
+import com.javalenciab90.models.openweather.Location
+import com.javalenciab90.models.openweather.Main
+import com.javalenciab90.models.openweather.Weather
 
-@Entity(tableName = "weather_info")
 data class WeatherEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val currentEntity: CurrentEntity?,
-    val locationEntity: LocationEntity?,
-    val requestEntity: RequestEntity?
+    val description: String,
+    val icon: String,
+    val id: Int,
+    val main: String
 ) {
-    fun toModel() : Weather {
-        return Weather(
-            current = currentEntity?.toModel(),
-            location = locationEntity?.toModel(),
-            request = requestEntity?.toModel(),
-            error = null
+    fun toModel() : Weather =
+        Weather(
+            description = description,
+            icon = icon,
+            id = id,
+            main = main
         )
-    }
 }

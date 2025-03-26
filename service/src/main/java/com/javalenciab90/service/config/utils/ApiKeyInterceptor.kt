@@ -20,6 +20,6 @@ class ApiKeyInterceptor(private val apiKey: String) : Interceptor {
     }
 
     private companion object {
-        const val API_KEY = "access_key"
+        const val API_KEY = "appid"
     }
 }

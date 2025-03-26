@@ -42,7 +42,7 @@ object DataConfigModule {
         return OkHttpClient.Builder()
             .callTimeout(30, TimeUnit.SECONDS)
             .connectTimeout(30, TimeUnit.SECONDS)
-            .addInterceptor(ApiKeyInterceptor(BuildConfig.WEATHER_STACK_API))
+            .addInterceptor(ApiKeyInterceptor(BuildConfig.WEATHER_OPEN_API))
             .addInterceptor(loggingInterceptor)
             .build()
     }

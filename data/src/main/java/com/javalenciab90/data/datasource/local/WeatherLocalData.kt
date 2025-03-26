@@ -1,10 +1,10 @@
 package com.javalenciab90.data.datasource.local
 
-import com.javalenciab90.data.room.entities.WeatherEntity
-import com.javalenciab90.models.Weather
+import com.javalenciab90.models.openweather.WeatherCurrent
+
 
 interface WeatherLocalData {
-    fun insertWeatherData(weather: Weather)
+    fun insertWeatherData(weather: WeatherCurrent)
 
-    fun getWeatherData(query: String) : Weather?
+    fun getWeatherData(query: String) : WeatherCurrent?
 }

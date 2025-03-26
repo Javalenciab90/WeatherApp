@@ -2,40 +2,44 @@ package com.javalenciab90.data.room.typeconverters
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
-import com.javalenciab90.data.room.entities.CurrentEntity
 import com.javalenciab90.data.room.entities.LocationEntity
-import com.javalenciab90.data.room.entities.RequestEntity
+import com.javalenciab90.data.room.entities.MainEntity
+import com.javalenciab90.data.room.entities.WeatherEntity
+import com.javalenciab90.models.openweather.Location
+import com.javalenciab90.models.openweather.Main
+import com.javalenciab90.models.openweather.Weather
 
 class Converters {
+
     private val gson = Gson()
 
     @TypeConverter
-    fun fromCurrentEntity(currentEntity: CurrentEntity): String {
-        return gson.toJson(currentEntity)
+    fun fromLocationEntity(location: LocationEntity?): String? {
+        return gson.toJson(location)
     }
 
     @TypeConverter
-    fun toCurrentEntity(currentEntityString: String): CurrentEntity {
-        return gson.fromJson(currentEntityString, CurrentEntity::class.java)
+    fun toLocationEntity(locationString: String?): LocationEntity? {
+        return gson.fromJson(locationString, LocationEntity::class.java)
     }
 
     @TypeConverter
-    fun fromLocationEntity(locationEntity: LocationEntity): String {
-        return gson.toJson(locationEntity)
+    fun fromMainEntity(main: MainEntity?): String? {
+        return gson.toJson(main)
     }
 
     @TypeConverter
-    fun toLocationEntity(locationEntityString: String): LocationEntity {
-        return gson.fromJson(locationEntityString, LocationEntity::class.java)
+    fun toMainEntity(mainString: String?): MainEntity? {
+        return gson.fromJson(mainString, MainEntity::class.java)
     }
 
     @TypeConverter
-    fun fromRequestEntity(requestEntity: RequestEntity): String {
-        return gson.toJson(requestEntity)
+    fun fromWeatherEntity(weather: WeatherEntity?): String? {
+        return gson.toJson(weather)
     }
 
     @TypeConverter
-    fun toRequestEntity(requestEntityString: String): RequestEntity {
-        return gson.fromJson(requestEntityString, RequestEntity::class.java)
+    fun toWeatherEntity(weatherString: String?): WeatherEntity? {
+        return gson.fromJson(weatherString, WeatherEntity::class.java)
     }
 }
