@@ -2,6 +2,7 @@ package com.javalenciab90.data.datasource.remote
 
 import com.javalenciab90.mapper.DataMapper
 import com.javalenciab90.utils.ApiException
+import com.javalenciab90.utils.CodeExceptions
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
@@ -27,7 +28,7 @@ abstract class FetchRemoteData<INPUT, OUTPUT> : RemoteDataSource<INPUT, OUTPUT> 
                     val weather = mapper.map(it)
                     emit(weather)
                 } ?: throw ApiException(
-                        errorCode = -2,
+                        errorCode = CodeExceptions.RESPONSE_BODY_NULL,
                         message = "Response body is null"
                 )
             } else {

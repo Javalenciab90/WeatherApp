@@ -1,7 +1,9 @@
 package com.javalenciab90.ui.components.topbar
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,19 +27,20 @@ fun TopSearchBar(
     onSettingsClick: () -> Unit
 ) {
     TopAppBar(
+        modifier = Modifier.wrapContentHeight(),
         title = { Text("") }, // Empty title to accommodate custom layout
         actions = {
             Row(
                 modifier = Modifier
-                    .padding(end = Dimens.All_8),
+                    .padding(horizontal = Dimens.All_8),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = onSettingsClick) {
-                    Icon(
-                        Icons.Default.Menu,
-                        contentDescription = null
-                    )
-                }
+//                IconButton(onClick = onSettingsClick) {
+//                    Icon(
+//                        Icons.Default.Menu,
+//                        contentDescription = null
+//                    )
+//                }
                 SearchBar(
                     searchText = searchText,
                     onSearch =  { onSearch(it) },

@@ -1,5 +1,6 @@
 package com.javalenciab90.ui.viewmodel
 
+import com.javalenciab90.common_ui.errors.ErrorDisplayUi
 import com.javalenciab90.ui.models.WeatherDataUi
 
 class WeatherContract {
@@ -24,6 +25,6 @@ class WeatherContract {
 sealed interface Status {
     data object Loading : Status
     data class Success(val data: WeatherDataUi) : Status
-    data class Error(val error: String) : Status
+    data class Error(val errorUi: ErrorDisplayUi) : Status
     data object Empty : Status
 }
