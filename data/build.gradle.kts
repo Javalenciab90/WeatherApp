@@ -18,7 +18,7 @@ dependencies {
     implementation(project(":plataform"))
     implementation(project(":service"))
     implementation(project(":networkmodels"))
-    api(project(":domain"))
+    implementation(project(":domain"))
 
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)

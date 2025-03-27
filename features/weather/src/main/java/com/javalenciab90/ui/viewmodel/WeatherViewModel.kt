@@ -6,6 +6,7 @@ import com.javalenciab90.plataform.base.CoroutineContextProvider
 import com.javalenciab90.plataform.base.MviViewModel
 import com.javalenciab90.theme.Dimens
 import com.javalenciab90.ui.models.WeatherDataUiPreviewProvider
+import com.javalenciab90.utils.ApiException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
@@ -35,13 +36,21 @@ class WeatherViewModel @Inject constructor(
     }
 
     private fun getWeather(query: String) {
-        launchInBackground {
-            getWeatherUseCase(query = query).collect {
-                updateNow {
-                    it.copy(
-                        searchText = query,
-                        status = Status.Success(data = WeatherDataUiPreviewProvider.getWeatherDataUi())
-                    )
+        if (query.isBlank()) {
+            updateNow {
+                it.copy(
+                    status = Status.Empty
+                )
+            }
+        } else {
+            launchInBackground {
+                getWeatherUseCase(query = query).collect {
+                    updateNow {
+                        it.copy(
+                            searchText = query,
+                            status = Status.Success(data = WeatherDataUiPreviewProvider.getWeatherDataUi())
+                        )
+                    }
                 }
             }
         }
@@ -81,11 +90,27 @@ class WeatherViewModel @Inject constructor(
     }
 
     override fun handleError(exception: Throwable) {
-        super.handleError(exception)
-        updateAsync {
-            it.copy(
-                status = Status.Error(exception.toString()))
+        if (exception is ApiException) {
+            //TODO: Handle on common-ui module this errors.
+            when (exception.errorCode) {
+                400 -> {
+
+                }
+                -1 -> {
+
+                }
+                -10 -> {
+                    updateAsync {
+                        it.copy(status = Status.Loading)
+                    }
+                }
+            }
+        } else {
+            updateAsync {
+                it.copy(status = Status.Empty)
+            }
         }
+        super.handleError(exception)
     }
 
     override fun setInitialState() = WeatherContract.WeatherState(status = Status.Loading)

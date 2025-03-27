@@ -8,14 +8,14 @@ import com.javalenciab90.networkmodels.dtos.openweather.LocationDTO
 import com.javalenciab90.networkmodels.dtos.openweather.MainDTO
 import com.javalenciab90.networkmodels.dtos.openweather.WeatherCurrentDTO
 import com.javalenciab90.networkmodels.dtos.openweather.WeatherDTO
-import com.javalenciab90.plataform.mapper.WeatherMapper
+import com.javalenciab90.mapper.DataMapper
 import javax.inject.Inject
 
-class WeatherNetworkMapper @Inject constructor(
+class NetworkDataMapper @Inject constructor(
     private val locationMapper: LocationDtoToLocationMapper,
     private val mainMapper: MainDtoToMainMapper,
-    private val weatherMapper: WeatherDtoToWeatherMapper
-) : WeatherMapper<WeatherCurrentDTO, WeatherCurrent> {
+    private val weatherMapper: WeatherDtoToDataMapper
+) : DataMapper<WeatherCurrentDTO, WeatherCurrent> {
 
     override fun map(input: WeatherCurrentDTO): WeatherCurrent {
         return WeatherCurrent(
@@ -30,7 +30,7 @@ class WeatherNetworkMapper @Inject constructor(
 }
 
 class LocationDtoToLocationMapper @Inject constructor(
-) : WeatherMapper<LocationDTO, Location> {
+) : DataMapper<LocationDTO, Location> {
 
     override fun map(input: LocationDTO): Location {
         return Location(
@@ -40,7 +40,7 @@ class LocationDtoToLocationMapper @Inject constructor(
     }
 }
 
-class MainDtoToMainMapper @Inject constructor() : WeatherMapper<MainDTO, Main> {
+class MainDtoToMainMapper @Inject constructor() : DataMapper<MainDTO, Main> {
     override fun map(input: MainDTO): Main {
         return Main(
             feelsLike = input.feelsLike,
@@ -55,7 +55,7 @@ class MainDtoToMainMapper @Inject constructor() : WeatherMapper<MainDTO, Main> {
     }
 }
 
-class WeatherDtoToWeatherMapper @Inject constructor() : WeatherMapper<List<WeatherDTO>, Weather> {
+class WeatherDtoToDataMapper @Inject constructor() : DataMapper<List<WeatherDTO>, Weather> {
     override fun map(input: List<WeatherDTO>): Weather {
         return Weather(
             description = input.first().description,

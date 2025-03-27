@@ -25,4 +25,5 @@ sealed interface Status {
     data object Loading : Status
     data class Success(val data: WeatherDataUi) : Status
     data class Error(val error: String) : Status
+    data object Empty : Status
 }

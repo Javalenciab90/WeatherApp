@@ -1,8 +1,5 @@
 package com.javalenciab90.ui.mappers
 
-import com.javalenciab90.plataform.mapper.WeatherMapper
-import com.javalenciab90.ui.models.WeatherDataUi
-import javax.inject.Inject
 //
 //class WeatherDataUiMapper @Inject constructor() : WeatherMapper<Weather, WeatherDataUi> {
 //

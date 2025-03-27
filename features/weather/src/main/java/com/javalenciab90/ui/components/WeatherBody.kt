@@ -50,6 +50,9 @@ fun WeatherBody(
                 }
             )
         }
+        is Status.Empty -> {
+            //TODO: Show a emptyScreen state
+        }
         is Status.Error -> {
             ErrorScreen(modifier = modifier)
         }

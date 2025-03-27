@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.javalenciab90.data.datasource.local.WeatherLocalData
 import com.javalenciab90.data.datasource.local.WeatherLocalDataImpl
-import com.javalenciab90.data.mappers.WeatherLocalMapper
+import com.javalenciab90.data.mappers.DataLocalMapper
 import com.javalenciab90.data.room.database.WeatherDao
 import com.javalenciab90.data.room.database.WeatherDatabase
 import dagger.Module
@@ -38,7 +38,7 @@ object LocalDataModule {
     @Provides
     fun provideWeatherLocalData(
         weatherDao: WeatherDao,
-        localMapper: WeatherLocalMapper
+        localMapper: DataLocalMapper
     ) : WeatherLocalData {
         return WeatherLocalDataImpl(
             weatherDao, localMapper
