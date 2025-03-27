@@ -8,14 +8,14 @@ import com.javalenciab90.models.openweather.Location
 import com.javalenciab90.models.openweather.Main
 import com.javalenciab90.models.openweather.Weather
 import com.javalenciab90.models.openweather.WeatherCurrent
-import com.javalenciab90.plataform.mapper.WeatherMapper
+import com.javalenciab90.mapper.DataMapper
 import javax.inject.Inject
 
-class WeatherLocalMapper @Inject constructor(
+class DataLocalMapper @Inject constructor(
     private val locationMapper: LocationToEntityMapper,
     private val mainMapper: MainToEntityMapper,
-    private val weatherMapper: WeatherToEntityMapper
-) : WeatherMapper<WeatherCurrent, WeatherCurrentEntity> {
+    private val weatherMapper: DataToEntityMapper
+) : DataMapper<WeatherCurrent, WeatherCurrentEntity> {
 
     override fun map(input: WeatherCurrent): WeatherCurrentEntity {
         return WeatherCurrentEntity(
@@ -29,7 +29,7 @@ class WeatherLocalMapper @Inject constructor(
     }
 }
 
-class LocationToEntityMapper @Inject constructor() : WeatherMapper<Location, LocationEntity> {
+class LocationToEntityMapper @Inject constructor() : DataMapper<Location, LocationEntity> {
 
     override fun map(input: Location): LocationEntity {
         return LocationEntity(
@@ -39,7 +39,7 @@ class LocationToEntityMapper @Inject constructor() : WeatherMapper<Location, Loc
     }
 }
 
-class MainToEntityMapper @Inject constructor() : WeatherMapper<Main, MainEntity> {
+class MainToEntityMapper @Inject constructor() : DataMapper<Main, MainEntity> {
 
     override fun map(input: Main): MainEntity {
         return MainEntity(
@@ -55,7 +55,7 @@ class MainToEntityMapper @Inject constructor() : WeatherMapper<Main, MainEntity>
     }
 }
 
-class WeatherToEntityMapper @Inject constructor() : WeatherMapper<Weather, WeatherEntity> {
+class DataToEntityMapper @Inject constructor() : DataMapper<Weather, WeatherEntity> {
     override fun map(input: Weather): WeatherEntity {
         return WeatherEntity(
             description = input.description,

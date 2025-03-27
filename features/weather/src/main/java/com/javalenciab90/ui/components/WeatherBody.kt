@@ -22,6 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
+import com.javalenciab90.components.empty.EmptyScreen
 import com.javalenciab90.components.error.ErrorScreen
 import com.javalenciab90.components.loading.LoadingScreen
 import com.javalenciab90.theme.Dimens
@@ -50,8 +51,16 @@ fun WeatherBody(
                 }
             )
         }
+        is Status.Empty -> {
+            EmptyScreen()
+        }
         is Status.Error -> {
-            ErrorScreen(modifier = modifier)
+            ErrorScreen(
+                title = uiState.status.errorUi.titleResId,
+                message = uiState.status.errorUi.messageResId,
+                icon = uiState.status.errorUi.iconResId,
+                modifier = modifier
+            )
         }
     }
 }

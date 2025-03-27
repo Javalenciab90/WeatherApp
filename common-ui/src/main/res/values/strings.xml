@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- API EXCEPTIONS -->
+    <string name="common_api_exception_title">Failed</string>
+
+    <string name="common_default_error">Something Wrong happened!. Sorry</string>
+
+    <string name="common_api_exception_bad_request">Some mandatory parameters in the request are missing or some of request parameters have incorrect format</string>
+    <string name="common_api_exception_not_found">Data with requested parameters does not exist in service database</string>
+    <string name="common_api_exception_unauthorized">You must add API token with granted access</string>
+    <string name="common_api_exception_too_many_requests">Quota of requests for provided API to this API was exceeded</string>
+    <string name="common_api_exception_unexpected_error">Internal error on service database</string>
+    <string name="common_api_exception_response_body_null">Response body on request is Null</string>
+    <string name="common_api_exception_geo_location_mapper_list_empty">When mapper location data is empty</string>
+</resources>
