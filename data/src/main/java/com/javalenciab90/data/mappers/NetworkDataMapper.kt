@@ -59,7 +59,7 @@ class WeatherDtoToDataMapper @Inject constructor() : DataMapper<List<WeatherDTO>
     override fun map(input: List<WeatherDTO>): Weather {
         return Weather(
             description = input.first().description,
-            icon = input.first().icon,
+            iconId = input.first().iconId,
             id = input.first().id,
             main = input.first().main
         )

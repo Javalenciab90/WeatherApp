@@ -26,7 +26,7 @@ fun IconDescription(
     ) {
         Icon(
             modifier = Modifier.size(Dimens.All_150),
-            painter = painterResource(R.drawable.ic_empty_weather),
+            painter = painterResource(icon),
             contentDescription = null
         )
         Text(text = description)

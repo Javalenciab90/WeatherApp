@@ -46,15 +46,17 @@ fun Temperature(
     temp: Double
 ) {
     Row(
-        verticalAlignment = Alignment.Bottom
+        horizontalArrangement = Arrangement.spacedBy(Dimens.All_4)
     ) {
         Text(
-            text = temp.toString(),
+            text = temp.toInt().toString(),
             style = TextStyle(fontFamily = FontFamily.Serif),
             fontSize = Dimens.Sp_90
         )
         Box(
-            modifier = Modifier.align(Alignment.Bottom)
+            modifier = Modifier
+                .padding(vertical = Dimens.All_8)
+                .align(Alignment.Top)
         ) {
             Text(
                 modifier = Modifier.padding(bottom = Dimens.All_16),

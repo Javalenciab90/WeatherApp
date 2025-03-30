@@ -1,11 +1,8 @@
 package com.javalenciab90.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,7 +10,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.javalenciab90.components.empty.EmptyScreen
 import com.javalenciab90.components.error.ErrorScreen
 import com.javalenciab90.components.loading.LoadingScreen
-import com.javalenciab90.theme.Dimens
 import com.javalenciab90.theme.R
 import com.javalenciab90.theme.WeatherAppTheme
 import com.javalenciab90.ui.models.WeatherDataUi
@@ -77,7 +73,7 @@ fun WeatherContent(
             feelsLike = uiData.feelsLike
         )
         IconDescription(
-            R.drawable.ic_empty_weather,
+            uiData.icon,
             uiData.weatherDescription
         )
         HumidityAndPressure()
