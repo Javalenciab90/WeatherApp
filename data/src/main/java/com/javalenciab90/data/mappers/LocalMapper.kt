@@ -59,7 +59,7 @@ class DataToEntityMapper @Inject constructor() : DataMapper<Weather, WeatherEnti
     override fun map(input: Weather): WeatherEntity {
         return WeatherEntity(
             description = input.description,
-            icon = input.icon,
+            iconId = input.iconId,
             id = input.id,
             main = input.main
         )

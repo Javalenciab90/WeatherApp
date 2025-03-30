@@ -79,7 +79,7 @@ fun SearchBar(
         placeholder = {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Search",
+                text = "Search City",
                 color = Color.Gray
             )
         },

@@ -6,7 +6,7 @@ data class WeatherDTO(
     @SerializedName("description")
     val description: String,
     @SerializedName("icon")
-    val icon: String,
+    val iconId: String,
     @SerializedName("id")
     val id: Int,
     @SerializedName("main")

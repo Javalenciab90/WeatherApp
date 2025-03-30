@@ -1,10 +1,12 @@
 package com.javalenciab90.ui.viewmodel
 
 import com.javalenciab90.common_ui.errors.ErrorDisplayUiResolver
+import com.javalenciab90.common_ui.icons.IconWeatherUiResolver
 import com.javalenciab90.domain.usecases.GetWeatherUseCase
 import com.javalenciab90.plataform.base.CoroutineContextProvider
 import com.javalenciab90.plataform.base.MviViewModel
 import com.javalenciab90.theme.Dimens
+import com.javalenciab90.ui.models.WeatherDataUi
 import com.javalenciab90.ui.models.WeatherDataUiPreviewProvider
 import com.javalenciab90.utils.ApiException
 import com.javalenciab90.utils.CodeExceptions
@@ -21,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class WeatherViewModel @Inject constructor(
     private val getWeatherUseCase: GetWeatherUseCase,
+    private val iconWeatherUiResolver: IconWeatherUiResolver,
     private val errorDisplayUiResolver: ErrorDisplayUiResolver,
     coroutineContext: CoroutineContextProvider
 ) : MviViewModel<WeatherContract.WeatherState, WeatherContract.Effect, WeatherContract.Intent>(coroutineContext) {
@@ -46,11 +49,12 @@ class WeatherViewModel @Inject constructor(
             }
         } else {
             launchInBackground {
-                getWeatherUseCase(query = query).collect {
+                getWeatherUseCase(query = query).collect { weather ->
+                    val icon = iconWeatherUiResolver.getIcon(weather.weather.iconId)
                     updateNow {
                         it.copy(
                             searchText = query,
-                            status = Status.Success(data = WeatherDataUiPreviewProvider.getWeatherDataUi())
+                            status = Status.Success(data = WeatherDataUi(weather, icon))
                         )
                     }
                 }

@@ -1,6 +1,5 @@
 package com.javalenciab90.common_ui.errors
 
-import com.javalenciab90.utils.ApiException
 import javax.inject.Inject
 
 class ErrorDisplayUiResolver @Inject constructor(
