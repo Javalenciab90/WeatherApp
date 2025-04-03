@@ -14,7 +14,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.javalenciab90.theme.Dimens
+import com.javalenciab90.ui.viewmodel.MapStatus
+import com.javalenciab90.ui.viewmodel.WeatherMapContract
 import com.javalenciab90.ui.viewmodel.WeatherMapViewModel
 
 private val DefaultCollapsedHeight = 56.dp
@@ -27,7 +30,7 @@ fun MapBottomSheetScaffold(
     modifier: Modifier = Modifier
 ) {
 
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val scaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = rememberStandardBottomSheetState(
@@ -48,7 +51,7 @@ fun MapBottomSheetScaffold(
             TopMapBar { onBack() }
         },
         sheetContent = {
-            //WeatherData()
+            WeatherDataContent(uiState = uiState)
         },
         sheetDragHandle = {
 

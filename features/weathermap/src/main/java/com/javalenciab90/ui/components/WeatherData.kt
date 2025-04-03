@@ -19,21 +19,53 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import com.javalenciab90.theme.Dimens
 import com.javalenciab90.theme.R
+import com.javalenciab90.ui.models.WeatherMapDataUi
+import com.javalenciab90.ui.models.WeatherMapDataUiPreviewProvider
+import com.javalenciab90.ui.viewmodel.MapStatus
+import com.javalenciab90.ui.viewmodel.WeatherMapContract
 
 @Composable
-fun WeatherData(
-    cityName: String,
-    lat: Double,
-    lon: Double,
-    temp: Double,
-    icon: Int,
-    description: String
+fun WeatherDataContent(
+    uiState: WeatherMapContract.MapState
 ) {
     Box(
         modifier = Modifier.fillMaxWidth()
     ) {
-        WeatherLocation(cityName, lat, lon)
-        WeatherInfo(icon, description, temp)
+        when (uiState.status) {
+            MapStatus.Loading -> {
+
+            }
+            is MapStatus.Success -> {
+                WeatherData(uiData = uiState.status.data)
+            }
+            is MapStatus.Error -> {
+
+            }
+        }
+    }
+}
+
+@Composable
+fun WeatherData(
+    uiData: WeatherMapDataUi
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(
+            horizontal = Dimens.All_16, vertical = Dimens.All_16
+        ),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Absolute.SpaceBetween
+    ) {
+        WeatherLocation(
+            cityName = uiData.name,
+            lat = uiData.lat,
+            lon = uiData.lon
+        )
+        WeatherInfo(
+            uiData.icon,
+            uiData.weatherDescription,
+            uiData.temp
+        )
     }
 }
 
@@ -43,37 +75,30 @@ fun WeatherLocation(
     lat: Double,
     lon: Double
 ) {
-    Row(
-        modifier = Modifier.fillMaxWidth().padding(
-            horizontal = Dimens.All_16, vertical = Dimens.All_16
-        ),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Absolute.SpaceBetween
+    Column(
+        verticalArrangement = Arrangement.spacedBy(Dimens.All_16)
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(Dimens.All_16)
+        Text(text = cityName)
+        Row(
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = cityName)
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_location),
-                    contentDescription = null
+            Icon(
+                painter = painterResource(R.drawable.ic_location),
+                contentDescription = null
+            )
+            Column {
+                Text(
+                    style = TextStyle(fontFamily = FontFamily.Serif),
+                    text = "$lat"
                 )
-                Column {
-                    Text(
-                        style = TextStyle(fontFamily = FontFamily.Serif),
-                        text = "$lat"
-                    )
-                    Text(
-                        style = TextStyle(fontFamily = FontFamily.Serif),
-                        text = "$lon"
-                    )
-                }
+                Text(
+                    style = TextStyle(fontFamily = FontFamily.Serif),
+                    text = "$lon"
+                )
             }
         }
     }
+
 }
 
 @Composable
@@ -87,7 +112,7 @@ fun WeatherInfo(
     ) {
         Icon(
             modifier = Modifier.size(Dimens.All_48),
-            painter = painterResource(R.drawable.ic_empty_weather),
+            painter = painterResource(icon),
             contentDescription = null
         )
         Text(text = description)
@@ -118,12 +143,11 @@ fun WeatherInfo(
 @Preview(showBackground = true)
 @Composable
 private fun WeatherDataPreview() {
-    WeatherData(
-        cityName = "CityName",
-        lat = 4.23234,
-        lon = -75.34344,
-        temp = 20.0,
-        description = "Sunny",
-        icon = R.drawable.ic_empty_weather
+    WeatherDataContent(
+        uiState = WeatherMapContract.MapState(
+            MapStatus.Success(
+                WeatherMapDataUiPreviewProvider.getWeatherMapDataUi()
+            )
+        )
     )
 }
