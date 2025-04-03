@@ -1,4 +1,4 @@
-package com.javalenciab90.home
+package com.javalenciab90.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.LaunchedEffect
@@ -17,9 +17,9 @@ import com.javalenciab90.ui.viewmodel.WeatherContract
 import com.javalenciab90.ui.viewmodel.WeatherViewModel
 
 fun NavGraphBuilder.buildGoWeatherScreen(
-
+    navController: NavController
 ) {
-    composable<Routes.Home> {
+    composable<Routes.Weather> {
 
         val viewModel: WeatherViewModel = hiltViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -29,7 +29,11 @@ fun NavGraphBuilder.buildGoWeatherScreen(
         }
 
         ObserveEffects(flow = viewModel.sideEffect) { effect ->
-
+            when (effect) {
+                WeatherContract.Effect.OpenSearchMap -> {
+                    navController.navigateToWeatherMap()
+                }
+            }
         }
 
         WeatherScreen(
@@ -45,6 +49,6 @@ fun NavGraphBuilder.buildGoWeatherScreen(
     }
 }
 
-fun NavController.navigateHome() {
-    navigate(Routes.Home)
+fun NavController.navigateToWeatherMap() {
+    navigate(Routes.WeatherMap)
 }

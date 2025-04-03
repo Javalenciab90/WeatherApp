@@ -11,7 +11,7 @@ class WeatherContract {
     )
 
     sealed interface Effect {
-
+        data object OpenSearchMap : Effect
     }
 
     sealed interface Intent {

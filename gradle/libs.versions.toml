@@ -16,11 +16,13 @@ kotlinxSerializationJson = "1.7.1"
 ksp = "2.0.10-1.0.24"
 lifecycleRuntimeKtx = "2.8.7"
 material = "1.12.0"
+maps-compose = "2.3.0"
 navVersion = "2.8.8"
 okhttpVersion = "4.12.0"
 retrofitKotlinxSerialization = "1.0.0"
 retrofitVersion = "2.9.0"
 roomVersion = "2.6.1"
+services-maps = "17.0.1"
 uiTextGoogleFonts = "1.7.8"
 
 [libraries]
@@ -68,6 +70,10 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation" }
+
+# Maps
+maps-compose = { group = "com.google.maps.android", name = "maps-compose", version.ref = "maps-compose" }
+play-services-map = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "services-maps" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

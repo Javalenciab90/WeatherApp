@@ -71,12 +71,16 @@ class WeatherViewModel @Inject constructor(
                 clearSearchText()
             }
             WeatherContract.Intent.SearchOnMap -> {
-                // TODO: Open Map Screen.
+                openSearchMap()
             }
             WeatherContract.Intent.OpenSettings -> {
                 // TODO: Open Settings.
             }
         }
+    }
+
+    private fun openSearchMap() {
+        postSideEffect(WeatherContract.Effect.OpenSearchMap)
     }
 
     private fun clearSearchText() {

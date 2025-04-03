@@ -9,8 +9,8 @@ sealed interface Routes {
     data object Splash: Routes
 
     @Serializable
-    data object Home: Routes
+    data object Weather: Routes
 
     @Serializable
-    data class Detail(val postId: String): Routes
+    data object WeatherMap: Routes
 }

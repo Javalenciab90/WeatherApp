@@ -4,7 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.javalenciab90.home.buildGoWeatherScreen
+import com.javalenciab90.navigation.buildGoWeatherScreen
+import com.javalenciab90.navigation.buildWeatherMapScreen
 import com.javalenciab90.plataform.routes.Routes
 
 @Composable
@@ -13,8 +14,14 @@ fun NavigatorApp(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Home
+        startDestination = Routes.Weather
     ) {
-        buildGoWeatherScreen()
+        buildGoWeatherScreen(
+            navController
+        )
+
+        buildWeatherMapScreen(
+            navController
+        )
     }
 }

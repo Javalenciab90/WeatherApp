@@ -37,6 +37,7 @@ dependencies {
     implementation(project(":design-system"))
     implementation(project(":plataform"))
     implementation(project(":features:weather"))
+    implementation(project(":features:weathermap"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

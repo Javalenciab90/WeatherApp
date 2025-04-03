@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
@@ -14,11 +15,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import com.javalenciab90.components.StickyFooter
 import com.javalenciab90.theme.Dimens
 import com.javalenciab90.theme.R
 
 @Composable
 fun EmptyScreen(
+    onMapSearch: () ->Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -44,6 +47,11 @@ fun EmptyScreen(
             Text(text = "No Entries")
 
             Text(text = "Please!\nEnter the city name to get current weather")
+
+            StickyFooter(
+                onMapSearch = onMapSearch,
+                modifier = Modifier.padding(vertical = Dimens.All_24)
+            )
         }
     }
 

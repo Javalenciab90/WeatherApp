@@ -7,10 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.javalenciab90.components.StickyFooter
 import com.javalenciab90.components.empty.EmptyScreen
 import com.javalenciab90.components.error.ErrorScreen
 import com.javalenciab90.components.loading.LoadingScreen
-import com.javalenciab90.theme.R
 import com.javalenciab90.theme.WeatherAppTheme
 import com.javalenciab90.ui.models.WeatherDataUi
 import com.javalenciab90.ui.models.WeatherDataUiPreviewProvider
@@ -37,7 +37,11 @@ fun WeatherBody(
             )
         }
         is Status.Empty -> {
-            EmptyScreen()
+            EmptyScreen(
+                onMapSearch = {
+                    onHandleIntent(WeatherContract.Intent.SearchOnMap)
+                }
+            )
         }
         is Status.Error -> {
             ErrorScreen(
