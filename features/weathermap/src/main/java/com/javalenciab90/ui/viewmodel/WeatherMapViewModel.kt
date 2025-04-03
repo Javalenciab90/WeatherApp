@@ -14,7 +14,9 @@ class WeatherMapViewModel @Inject constructor(
     init {
         updateNow {
             it.copy(
-                status =  MapStatus.Success(WeatherMapDataUiPreviewProvider.getWeatherMapDataUi())
+                status =  MapStatus.Success(
+                    WeatherMapDataUiPreviewProvider.getWeatherMapDataUi()
+                )
             )
         }
     }

@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.javalenciab90.detail"
-    resourcePrefix = "detail_"
+    resourcePrefix = "weathermap_"
 
     kotlinOptions {
         jvmTarget = "1.8"
@@ -25,6 +25,9 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
+
+    implementation(libs.maps.compose)
+    implementation(libs.play.services.map)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
