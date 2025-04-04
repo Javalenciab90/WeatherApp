@@ -15,7 +15,6 @@ android {
 
 dependencies {
 
-    implementation(project(":plataform"))
     implementation(project(":service"))
     implementation(project(":networkmodels"))
     implementation(project(":domain"))

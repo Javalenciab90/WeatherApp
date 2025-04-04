@@ -21,7 +21,6 @@ dependencies {
     implementation(project(":design-system"))
     implementation(project(":domain"))
     implementation(project(":data"))
-    implementation(project(":networkmodels"))
     implementation(project(":common-ui"))
 
     implementation(libs.hilt.android)

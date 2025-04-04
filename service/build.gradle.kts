@@ -32,7 +32,6 @@ android {
 
 dependencies {
 
-    implementation(project(":plataform"))
     implementation(project(":networkmodels"))
 
     // Retrofit
